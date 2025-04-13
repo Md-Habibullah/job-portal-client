@@ -30,12 +30,12 @@ const SignIn = () => {
             .then(result => {
                 console.log(result.user.email)
                 const user = { email }
-                axios.post('http://localhost:5000/jwt', user,
+                axios.post('https://job-portal-server-amber-psi.vercel.app/jwt', user,
                     { withCredentials: true })
                     .then(result => {
                         console.log(result.data)
                     })
-                    .catch(err => console.log(error.message))
+                    .catch(err => console.log(err.message))
                 // navigate(from)
             })
             .catch(error => console.log(error.message))

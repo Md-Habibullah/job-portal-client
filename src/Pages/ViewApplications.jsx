@@ -11,7 +11,7 @@ const ViewApplications = () => {
         const data = {
             status: e.target.value
         }
-        axios.patch(`http://localhost:5000/job-applications/${id}`, data)
+        axios.patch(`https://job-portal-server-amber-psi.vercel.app/job-applications/${id}`, data)
             .then(data => {
                 if (data.data.modifiedCount) {
                     console.log(data.data)
@@ -25,7 +25,7 @@ const ViewApplications = () => {
                 }
             })
 
-        // fetch(`http://localhost:5000/job-applications/${id}`, {
+        // fetch(`https://job-portal-server-amber-psi.vercel.app/job-applications/${id}`, {
         //     method: 'PATCH',
         //     headers: {
         //         'content-type': 'application/json'

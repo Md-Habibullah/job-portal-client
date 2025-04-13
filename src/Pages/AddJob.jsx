@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useAuth from '../Hooks/useAuth';
 import axios from 'axios';
 
@@ -10,13 +10,13 @@ const AddJob = () => {
         const formData = new FormData(e.target);
         const initialData = Object.fromEntries(formData.entries());
         const { min, max, currency, ...newJobs } = initialData;
-        newJobs.salaryRange = { min, max, currency }
+        newJobs.salaryRange = { min: parseInt(min), max: parseInt(max), currency }
         newJobs.requirements = newJobs.requirements.split('\n');
         newJobs.responsibilities = newJobs.responsibilities.split('\n');
         // console.log(initialData);
         // console.log(newJobs)
 
-        axios.post('http://localhost:5000/jobs', newJobs)
+        axios.post('https://job-portal-server-amber-psi.vercel.app/jobs', newJobs)
             .then(result => {
                 if (result.insertedId) {
                     Swal.fire({
@@ -82,10 +82,10 @@ const AddJob = () => {
                         <label className="label">
                             <span className="label-text">Salary Range</span>
                         </label>
-                        <input type="text" name='min' placeholder="Min" className="input input-bordered" required />
+                        <input type="number" name='min' placeholder="Min" className="input input-bordered" required />
                     </div>
                     <div className="form-control">
-                        <input type="text" name='max' placeholder="Max " className="input input-bordered" required />
+                        <input type="number" name='max' placeholder="Max " className="input input-bordered" required />
                     </div>
                     <div className="form-control">
                         <select defaultValue="Currency" name="currency" className="select select-ghost w-full max-w-xs">
@@ -133,11 +133,13 @@ const AddJob = () => {
                 </div>
 
                 {/* HR Email */}
-                <div className="form-control">
+                <div
+                    className="form-control hover:pointer-events-none">
                     <label className="label">
                         <span className="label-text">HR Email</span>
                     </label>
-                    <input type="text" defaultValue={user?.email} name='hr_email' placeholder="HR Email" className="input input-bordered" required />
+                    <input readOnly type="email" defaultValue={user?.email} name='hr_email' placeholder="HR Email" className="input input-bordered" required />
+
                 </div>
                 {/* application Deadline */}
                 <div className="form-control">

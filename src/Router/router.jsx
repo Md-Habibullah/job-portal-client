@@ -10,6 +10,7 @@ import MyApplication from '../Pages/MyApplication';
 import AddJob from '../Pages/AddJob';
 import MyPostedJobs from '../Pages/MyPostedJobs';
 import ViewApplications from '../Pages/ViewApplications';
+import AllJobs from '../Pages/AllJobs';
 
 const router = createBrowserRouter([
     {
@@ -23,8 +24,12 @@ const router = createBrowserRouter([
             },
             {
                 path: "jobs/:id",
-                loader: ({ params }) => fetch(`http://localhost:5000/jobs/${params.id}`),
+                loader: ({ params }) => fetch(`https://job-portal-server-amber-psi.vercel.app/jobs/${params.id}`),
                 element: <PrivateRoute><JobsById /></PrivateRoute>
+            },
+            {
+                path: "all-jobs",
+                element: <AllJobs></AllJobs>
             },
             {
                 path: "jobApply/:id",
@@ -44,7 +49,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "viewApplications/:job_id",
-                loader: ({ params }) => fetch(`http://localhost:5000/job-applications/jobs/${params.job_id}`),
+                loader: ({ params }) => fetch(`https://job-portal-server-amber-psi.vercel.app/job-applications/jobs/${params.job_id}`),
                 element: <PrivateRoute><ViewApplications /></PrivateRoute>
             },
             {

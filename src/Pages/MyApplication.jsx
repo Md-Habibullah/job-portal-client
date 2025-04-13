@@ -7,7 +7,7 @@ const MyApplication = () => {
     const { user } = useAuth();
     const [jobs, setJobs] = useState([]);
     useEffect(() => {
-        axios.get(`http://localhost:5000/jobApplication?email=${user.email}`,
+        axios.get(`https://job-portal-server-amber-psi.vercel.app/jobApplication?email=${user.email}`,
             { withCredentials: true })
             .then(result => {
                 setJobs(result.data)
@@ -34,7 +34,7 @@ const MyApplication = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axios.delete(`http://localhost:5000/jobApplication?id=${id}`)
+                axios.delete(`https://job-portal-server-amber-psi.vercel.app/jobApplication?id=${id}`)
                     .then(() => {
                         const remainJobs = jobs.filter(job => job._id !== id);
                         const updatedJobs = [...remainJobs]

@@ -17,10 +17,14 @@ const HotJobsCard = ({ job }) => {
                         <h4>{company}</h4>
                         <p>{location}</p>
                     </div>
+
                 </div>
                 <div className="card-body">
                     <h2 className="card-title">{title}</h2>
                     <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <div>
+                        <h2>{salaryRange.min} - {salaryRange.max}</h2>
+                    </div>
                     <div className="card-actions justify-end">
                         <Link to={`/jobs/${_id}`}>
                             <button className="btn btn-primary">Apply</button>
